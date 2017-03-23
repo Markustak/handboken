@@ -49,9 +49,9 @@ public class HandController {
         }
 
     }
-
     @GetMapping("/")
-    public ModelAndView index(HttpSession session) {
+    public ModelAndView index(HttpSession session) throws Exception {
+        System.out.println("ID: "+ counter);
         if (session.getAttribute("user") != null) {
             System.out.println("inloggadyey");
             String removeBtn = "Remove";
@@ -65,7 +65,7 @@ public class HandController {
 
     Hand handObject = new Hand();
     int counter = 0;
-
+    int dbCounter = 0;
     @MessageMapping("/hello")
     @SendTo("/topic/message/room")
     public Hand hand(HandMessage message) throws Exception {
@@ -76,11 +76,13 @@ public class HandController {
             handObject.addContent(snothing);
             return handObject;
         } else {
-
+            dbCounter = dbconnecthand.getId();
             dbconnecthand.addHand(message);
             String s = "";
-            s = s + "<tr><td><i class=\"fa fa-hand-paper-o\" aria-hidden=\"true\"></i>" + message.getName() + "</td><td>" + message.getMessage() + "</td><td>" + message.getRoom() + " </td><td><button class=\"removeBtn\" id=\"btn" + counter + "\" onclick=\"getParent(this)\">Remove</button></td></tr>'";
+            s = s + "<tr><td><i class=\"fa fa-hand-paper-o\" aria-hidden=\"true\"></i>" + message.getName() + "</td><td>" + message.getMessage() + "</td><td>" + message.getRoom() + " </td><td><button class=\"removeBtn\" id=\"btn" + counter +"."+dbCounter + "\" onclick=\"getParent(this)\">Remove</button></td></tr>'";
             counter++;
+            System.out.println("COUNTER: " + counter);
+            System.out.println("dbCOunter: " + dbCounter);
             handObject.addContent(s);
             return handObject;
         }
@@ -89,11 +91,10 @@ public class HandController {
     @MessageMapping("/delete")
     @SendTo("/topic/message/room")
     public Hand handDelete(HandMessage message) throws Exception {
-        int away = Integer.parseInt(message.getName().substring(3));
-        System.out.println("värde " + handObject.getContent().get(away));
-        System.out.println("tabort " + away);
-
-        handObject.getContent().set(away, "");
+        int splitz = message.toString().indexOf('.'); //används för att separera databasid från buttonId
+        int away = Integer.parseInt(message.getName().substring(3,splitz+1)); //används för att separera databasid från buttonId
+        dbconnecthand.changeHand(Integer.parseInt(message.getName().substring(splitz+2))+1); //Sätter databas på "löst"
+        handObject.getContent().set(away, ""); //tar bort från html
 
 
         return handObject;

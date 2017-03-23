@@ -39,6 +39,27 @@ public class dbconnect implements dbconnectrep {
             throw new Exception(e);
         }
     }
+    public void changeHand(int hand_id) throws Exception{
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("UPDATE hands SET fixed = 1 WHERE hand_id=?;")) {
+            ps.setInt(1, hand_id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new Exception(e);
+        }
+    }
+    public int getId() throws Exception{
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT top 1 * FROM hands ORDER BY hand_id desc")) {
+            rs.next();
+            int returnval = rs.getInt(1);
+            return returnval;
+        } catch (SQLException e) {
+            return 0;
+        }
+
+    }
 
     public List<HandMessage> getHandMessages() {
 
