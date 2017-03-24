@@ -88,6 +88,8 @@ public class HandController {
         }
     }
 
+    
+
     @MessageMapping("/delete")
     @SendTo("/topic/message/room")
     public Hand handDelete(HandMessage message) throws Exception {
