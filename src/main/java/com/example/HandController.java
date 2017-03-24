@@ -88,7 +88,7 @@ public class HandController {
         }
     }
 
-    
+
 
     @MessageMapping("/delete")
     @SendTo("/topic/message/room")
