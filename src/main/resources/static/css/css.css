@@ -1,0 +1,74 @@
+body {
+  background: url(../img/back.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#main-content {
+  max-width: 940px;
+  padding: 2em 3em;
+  margin: 0 auto 20px;
+  border: 1px solid #e5e5e5;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+
+  background: #ffffff; /* Old browsers */
+  background: -moz-linear-gradient(top, #ffffff 0%, #eeeeee 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #ffffff 0%,#eeeeee 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #ffffff 0%,#eeeeee 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eeeeee',GradientType=0 );
+  border: 1px white solid;
+  box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+}
+
+h1 {
+  font-family: 'Architects Daughter', cursive;
+  font-size: 70px;
+  color: #319ef5;
+  text-shadow: 1px 1px 1px #0b375a;
+  margin-top: 0;
+}
+
+span.fa.fa-hand-stop-o {
+  margin-right: 1%;
+  color: #e23f7f;
+  text-shadow: 1px 1px 0px #444444;
+}
+
+button#send {
+  background-color: #319ef5;
+  color: white;
+  border: 1px solid #2b5f88;
+}
+
+#conversation {
+  margin-top: 2%;
+}
+
+@media (min-width: 768px) {
+  input { width: 25% !important; }
+  #message { width: 40% !important; }
+  #send {width: 8% !important;}
+  .form-inline .form-group { width: 100%; }
+  button#send { padding: 6px 0; }
+}
+
+@media (max-width: 767px) {
+  #main-content { max-width: 90%; }
+  .form-group > * { margin-top: 10px;}
+}
+
+@media (max-width: 576px) {
+  h1 { font-size: 60px;}
+}
+
+@media (max-width: 492px) {
+  h1 { font-size: 50px;}
+}
+
+@media (max-width: 436px) {
+  h1 { font-size: 40px;}
+}
