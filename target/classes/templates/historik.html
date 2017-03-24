@@ -18,29 +18,6 @@
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     <script src="/app.js"></script>
     <script src="/js/jsScript.js"></script>
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-
-        function showHands(message) {
-            var knappText = [[${knappen}]];
-
-            if (knappText == "Remove") {
-                $("#greetings").children().remove();
-                $("#greetings").append(message);
-
-            }
-            else {
-                $("#greetings").children().remove();
-                var $message = $(message).not('button');
-                $("#greetings").append(message);
-                $(".removeBtn").css("display","none");
-                $(".removeBtn").remove();
-            }
-        }
-
-
-        /*]]>*/
-    </script>
 </head>
 <body>
 <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
@@ -59,16 +36,6 @@
 
         <div class="col-md-12">
             <h1><span class="fa fa-hand-stop-o"></span>Handboken</h1>
-            <form class="form-inline">
-                <div class="form-group">
-                    <input type="text" id="name" class="form-control" placeholder="Your name here..."/>
-                    <input type="text" id="message" class="form-control" placeholder="Describe your problem here..."/>
-                    <input type="text" id="room" class="form-control" placeholder="Tell us where you are here..."/>
-                    <button id="send" class="btn btn-default" type="submit">Send</button>
-                    <input type="button" class="removeBtn form-control" onclick="location.href='/historik';" value="Log" />
-                </div>
-
-            </form>
         </div>
     </div>
 
@@ -76,9 +43,8 @@
         <div class="col-md-12">
             <table id="conversation" class="table table-striped">
                 <thead>
-                <tr>
-                    <th>Raise your hand</th>
-                </tr>
+                <tr>HEEEEEEEJ</tr>
+                <div th:utext="${historik}"></div>
                 </thead>
                 <tbody id="greetings">
                 </tbody>

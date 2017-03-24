@@ -75,6 +75,27 @@ public class dbconnect implements dbconnectrep {
         }
     }
 
+    public String getHistory() {
+        String s = "";
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT name, text, room, date, fixed FROM dbo.hands")) {
+            while (rs.next()) {
+                String name = rs.getString(1);
+                String message = rs.getString(2);
+                String room = rs.getString(3);
+                String date = rs.getDate(4).toString();
+                int fixed = rs.getInt(5);
+                s = s + "<tr><td><i class=\"fa fa-hand-paper-o\" aria-hidden=\"true\"></i>" + name + "</td><td>" + message + "</td><td>" + date + " </td>"+ "<td>" + fixed + " </td>"+"</tr>";
+            }
+            return s;
+        } catch (SQLException e) {
+            return s;
+        }
+    }
+
+
+
     private HandMessage rsHands(ResultSet rs) throws  SQLException {
         return new HandMessage (
         rs.getString("name"),
@@ -82,9 +103,4 @@ public class dbconnect implements dbconnectrep {
         rs.getString("room")
         );
     }
-//
-//
-//    private List<String> rsBlog(ResultSet rs) throws SQLException {
-//        return new Blog(rs.getLong("id"), rs.getString("title"));
-//    }
 }
